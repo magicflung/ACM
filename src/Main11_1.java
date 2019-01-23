@@ -41,8 +41,8 @@ public class Main11_1 {
 			if(adj[v][i] > 0 && !mark[i]) {
 				dfs(i);
 				// 01背包
-				for(int j = M; j >= costs[v]; j--) { // 从士兵总人数开始
-					for(int k = 1; k <= j - costs[v]; k++) {
+				for(int j = M; j >= costs[v]; j--) { // 当士兵人数一定时
+					for(int k = 1; k <= j - costs[v]; k++) { // 由于经过v节点所以一定要消耗costs[v]个士兵
 						// 表示当前以j个人来占领v房所得的脑多还是分配j-k个人到当前房间加上分配k人取下一个房间所得的脑多
 						if(dp[v][j] < dp[v][j - k] + dp[i][k]) {
 							dp[v][j] = dp[v][j - k] + dp[i][k];

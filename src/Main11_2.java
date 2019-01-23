@@ -24,7 +24,7 @@ public class Main11_2 {
 	private static int[][] dp = new int[SIZE][SIZE];
 	private static List<Integer>[] adj;
 	// 树状的深度搜索——树有根结点
-	// 使用pre来记录v的父结点
+	// 使用pre来记录v的父结点——树
 	public static void dfs(int v, int pre) {
 		for(int i = costs[v]; i <= M; i++) { // 表示在房间v需要至少i个士兵来击杀虫子
 			dp[v][i] = brains[v]; // 也就是说至少有i个士兵甚至更多，就可以获得该房间的大脑的最大值
@@ -35,8 +35,8 @@ public class Main11_2 {
 				int w = adj[v].get(i);
 				if(w == pre) continue;
 				dfs(w, v);
-				for(int j = M; j >= costs[v]; j--) { // 表示士兵假如为M，那么目前至少需要costs[j]个士兵
-					for(int k = 1; k <= j - costs[v]; k++) {
+				for(int j = M; j >= costs[v]; j--) { // 当士兵人数一定时
+					for(int k = 1; k <= j - costs[v]; k++) { // 由于经过v节点所以一定要消耗costs[v]个士兵
 						if(dp[v][j] < dp[v][j - k] + dp[w][k]) {
 							dp[v][j] = dp[v][j - k] + dp[w][k];
 						}
